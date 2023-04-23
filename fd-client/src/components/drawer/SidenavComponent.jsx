@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -22,6 +22,13 @@ import LoginComponent from '../login/LoginComponent';
 import DepositsComponent from '../deposits/DepositsComponent';
 import { FaBeer } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import LogoutComponent from '../logout/LogoutComponent'
+import ErrorComponent from '../ErrorComponent'
+import WelcomeComponent from '../welcome/WelcomeComponent'
+import AuthProvider, { useAuth } from '../security/AuthContext'
+import DepositComponent from '../deposits/DepositComponent'
+import AppBarComponent from '../header/HeaderComponent';
 
 const drawerWidth = 240;
 
@@ -55,24 +62,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
@@ -91,9 +80,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function SidenavComponent() {
+  const authContext = useAuth()
+  const isAuthenticated = authContext.isAuthenticated
+  const username = authContext.username
   const theme = useTheme();
-  const [open, setOpen] = useState(true);
-  const [menudata, setMenudata] = useState("Login");
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -103,28 +94,22 @@ export default function SidenavComponent() {
     setOpen(false);
   };
 
+  function AuthenticatedRoute({children}) {
+    const authContext = useAuth()
+    
+    if(authContext.isAuthenticated)
+        return children
+  
+    return <Navigate to="/" />
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" elevation={4} sx={{backgroundColor: "#ffffff", color: "#2f2f2f"}}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={() => setOpen(!open)}
-            edge="start"
-            // sx={{
-            //   marginRight: 5,
-            //   ...(open && { display: 'none' }),
-            // }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Financial Dolphin
-          </Typography>
-        </Toolbar>
-      </AppBar>
+
+      <AppBarComponent open={open} handleDrawerOpen={handleDrawerOpen} handleDrawerClose={handleDrawerClose} />
+
+      {isAuthenticated &&
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -133,58 +118,86 @@ export default function SidenavComponent() {
         </DrawerHeader>
         <Divider />
         <List>
-        <ListItem disablePadding sx={{ display: 'block' }}>
-          <ListItemButton
-            component={Link}
-            to="/login"
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-            }}
-            onClick={() => setMenudata("Login")}
-          >
-            <ListItemIcon
+          <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              component={Link}
+              to={"/welcome/"+username+""}
               sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
               }}
             >
-              <MailIcon />
-            </ListItemIcon>
-            <ListItemText primary="Login" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding sx={{ display: 'block' }}>
-          <ListItemButton
-            component={Link}
-            to="/deposits"
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-            }}
-            onClick={() => setMenudata("Deposits")}
-          >
-            <ListItemIcon
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }}/>
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              component={Link}
+              to="/deposits"
               sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
               }}
             >
-              <FaBeer />
-            </ListItemIcon>
-            <ListItemText primary="Deposits" />
-          </ListItemButton>
-        </ListItem>
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <FaBeer />
+              </ListItemIcon>
+              <ListItemText primary="Deposits" sx={{ opacity: open ? 1 : 0 }}/>
+            </ListItemButton>
+          </ListItem>
         </List>
         <Divider />
-      </Drawer>
+      </Drawer> }
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        {menudata == "Login" && <LoginComponent />}
-        {menudata == "Deposits" && <DepositsComponent />}
+    
+        <Routes>
+          <Route path='/' element={<LoginComponent />} />
+          <Route path='/login' element={<LoginComponent />} />
+
+          <Route path='/welcome/:username' element={
+            <AuthenticatedRoute>
+              <WelcomeComponent />
+            </AuthenticatedRoute>
+          } />
+
+          <Route path='/deposits' element={
+            <AuthenticatedRoute>
+              <DepositsComponent />
+            </AuthenticatedRoute>
+          } />
+
+          <Route path='/deposit/:id' element={
+            <AuthenticatedRoute>
+              <DepositComponent />
+            </AuthenticatedRoute>
+          } />
+
+          <Route path='/logout' element={
+            <AuthenticatedRoute>
+              <LogoutComponent />
+            </AuthenticatedRoute>
+          } />
+
+          <Route path='*' element={<ErrorComponent />} />
+
+        </Routes>
       </Box>
     </Box>
   );

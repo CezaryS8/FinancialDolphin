@@ -8,15 +8,16 @@ import AuthProvider, { useAuth } from './security/AuthContext'
 import DepositsComponent from './deposits/DepositsComponent'
 import DepositComponent from './deposits/DepositComponent'
 import SidenavComponent from './drawer/SidenavComponent'
+import AppBarComponent from './header/HeaderComponent'
 
-function AuthenticatedRoute({children}) {
-    const authContext = useAuth()
+// function AuthenticatedRoute({children}) {
+//     const authContext = useAuth()
     
-    if(authContext.isAuthenticated)
-        return children
+//     if(authContext.isAuthenticated)
+//         return children
 
-    return <Navigate to="/" />
-}
+//     return <Navigate to="/" />
+// }
 
 export default function FdClientApp() {
     return (
@@ -24,9 +25,19 @@ export default function FdClientApp() {
             <AuthProvider>
                 <BrowserRouter>
                 {/* <HeaderComponent /> */}
-                <SidenavComponent />
+
+                {/* <Grid container spacing={0}>
+                    <Grid item xs={2}>
+                        <SidenavComponent />
+                    </Grid>
+                    <Grid item xs={10}>
+                        <Routes />
+                    </Grid>
+                    </Grid> */}
+                    {/* <AppBarComponent /> */}
+                    <SidenavComponent />
                     
-                    <Routes>
+                    {/* <Routes>
                         
                         <Route path='/' element={ <LoginComponent /> } />
                         <Route path='/login' element={ <LoginComponent /> } />
@@ -57,7 +68,7 @@ export default function FdClientApp() {
                         
                         <Route path='*' element={<ErrorComponent /> } />
                         
-                    </Routes> 
+                    </Routes>  */}
                 </BrowserRouter>
             </AuthProvider>
         </div>

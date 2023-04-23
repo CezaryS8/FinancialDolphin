@@ -62,7 +62,7 @@ function DepositsComponent() {
         <>
         <Box height={100} />
             <div className="container">
-                <h1>You deposits!</h1>
+                <h1>Your deposits!</h1>
                 
                 {message && <div className="alert alert-warning">{message}</div>}
                 
