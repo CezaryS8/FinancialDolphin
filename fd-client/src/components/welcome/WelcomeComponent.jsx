@@ -39,7 +39,7 @@ function WelcomeComponent() {
             <div className="WelcomeComponent">
                 <h1>Welcome {username}</h1>
                 <div>
-                    Manage your finances - <Link to="/todos">Go here</Link>
+                    Manage your finances - <Link to="/deposits">Go here</Link>
                 </div>
                 <div>
                     <button className="btn btn-success m-5" onClick={callHelloWorldRestApi}>
