@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import {useNavigate} from 'react-router-dom'
 import { retrieveAllDepositsForUsernameApi, deleteDepositApi } from "../api/DepositApiService"
 import { useAuth } from "../security/AuthContext"
 import { Box } from "@mui/material"
+import SidenavComponent from "../drawer/SidenavComponent"
+import DepositsDataTableComponent from "./DepositsDataTableComponent"
+import MaterialReactTable from 'material-react-table';
 
 function DepositsComponent() {
 
@@ -19,8 +22,55 @@ function DepositsComponent() {
     const [deposits,setDeposits] = useState([])
 
     const [message,setMessage] = useState(null)
+
+      //data and fetching state
+    const [isError, setIsError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isRefetching, setIsRefetching] = useState(false);
+    const [rowCount, setRowCount] = useState(0);
+
+    //table state
+    const [columnFilters, setColumnFilters] = useState([]);
+    const [globalFilter, setGlobalFilter] = useState('');
+    const [sorting, setSorting] = useState([]);
+    const [pagination, setPagination] = useState({
+        pageIndex: 0,
+        pageSize: 10,
+    });
     
-    useEffect ( () => refreshDeposits(), [])
+    useEffect ( () => refreshDeposits(), [
+        columnFilters,
+        globalFilter,
+        pagination.pageIndex,
+        pagination.pageSize,
+        sorting,
+      ])
+
+    const columns = useMemo(
+        () => [
+          {
+            accessorKey: 'name',
+            header: 'name',
+          },
+          {
+            accessorKey: 'interest',
+            header: 'interest',
+          },
+          {
+            accessorKey: 'bank',
+            header: 'bank',
+          },
+          {
+            accessorKey: 'maturityDate',
+            header: 'maturityDate',
+          },
+          {
+            accessorKey: 'amount',
+            header: 'amount',
+          },
+        ],
+        [],
+      );
 
     function refreshDeposits() {
         
@@ -31,20 +81,16 @@ function DepositsComponent() {
             
         )
         .catch(error => console.log(error))
-    
     }
 
     function deleteDeposit(id) {
         console.log('clicked ' + id)
         deleteDepositApi(username, id)
         .then(
-
             () => {
                 setMessage(`Delete of deposit with id = ${id} successful`)
                 refreshDeposits()
             }
-            //1: Display message
-            //2: Update Todos list
         )
         .catch(error => console.log(error))
     }
@@ -60,9 +106,44 @@ function DepositsComponent() {
 
     return (
         <>
-        <Box height={100} />
+        {/* <Box height={100} /> */}
             <div className="container">
+
+
                 <h1>Your deposits!</h1>
+
+                <MaterialReactTable
+                    columns={columns}
+                    data={deposits}
+                    enableRowSelection
+                    getRowId={(row) => row.phoneNumber}
+                    initialState={{ showColumnFilters: true }}
+                    manualFiltering
+                    manualPagination
+                    manualSorting
+                    muiToolbarAlertBannerProps={
+                        isError
+                        ? {
+                            color: 'error',
+                            children: 'Error loading data',
+                            }
+                        : undefined
+                    }
+                    onColumnFiltersChange={setColumnFilters}
+                    onGlobalFilterChange={setGlobalFilter}
+                    onPaginationChange={setPagination}
+                    onSortingChange={setSorting}
+                    rowCount={rowCount}
+                    state={{
+                        columnFilters,
+                        globalFilter,
+                        isLoading,
+                        pagination,
+                        showAlertBanner: isError,
+                        showProgressBars: isRefetching,
+                        sorting,
+                    }}
+                />
                 
                 {message && <div className="alert alert-warning">{message}</div>}
                 
@@ -103,6 +184,9 @@ function DepositsComponent() {
                 </div>
                 <div className="btn btn-success m-5" onClick={addNewDeposit}>Add New Deposit</div>
             </div>
+
+                        
+            
         </>
     )
 }

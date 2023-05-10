@@ -16,15 +16,15 @@ public class DepositService {
 	private static int depositsCount = 0;
 	
 	static {
-		deposits.add(new Deposit(++depositsCount, "in28minutes","Lokata promocyjna wakacje",
+		deposits.add(new Deposit(++depositsCount, "czarek","Lokata promocyjna wakacje",
 					8.00, "MBANK", LocalDate.now().plusYears(1), LocalDate.now(),
 							new BigDecimal("10000"), new BigDecimal("0"), new BigDecimal("10.5"),
 					true, "stałe", 1 ));
-		deposits.add(new Deposit(++depositsCount, "in28minutes","Lokata 2",
+		deposits.add(new Deposit(++depositsCount, "czarek","Lokata 2",
 				8.00, "PKO", LocalDate.now().plusYears(1), LocalDate.now(),
 				new BigDecimal("5000"), new BigDecimal("0"), new BigDecimal("10.5"),
 				true, "stałe", 1 ));
-		deposits.add(new Deposit(++depositsCount, "in28minutes","Lokata rodzinna",
+		deposits.add(new Deposit(++depositsCount, "czarek","Lokata rodzinna",
 				8.00, "PKO", LocalDate.now().plusYears(1), LocalDate.now(),
 				new BigDecimal("3500"), new BigDecimal("0"), new BigDecimal("10.5"),
 				true, "stałe", 1 ));
