@@ -65,7 +65,7 @@ export default function Header(props) {
     };
 
     return (
-        <AppBar position="fixed" open={open}>
+        <AppBar className="header" position="fixed" open={open}>
             <Toolbar>
                 {isAuthenticated &&
                 <IconButton
