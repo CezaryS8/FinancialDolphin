@@ -18,7 +18,6 @@ export default function DepositMenuButton(props) {
     const authContext = useAuth()
     const username = authContext.username
     const navigate = useNavigate()
-    const [deposits, setDeposits] = useState([])
     const [id, setId] = useState(props.id);
 
     const handleClick = (event) => {
@@ -81,7 +80,6 @@ export default function DepositMenuButton(props) {
                                 handleUpdateClick(id);
                             }
                         }}
-
                     >
                         {option}
                     </MenuItem>
