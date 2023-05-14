@@ -1,6 +1,5 @@
-package dev.cezarys8.fdserver.deposit.repository;
+package dev.cezarys8.fdserver.wallet.deposit;
 
-import dev.cezarys8.fdserver.deposit.Deposit;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

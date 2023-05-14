@@ -1,4 +1,4 @@
-package dev.cezarys8.fdserver.deposit;
+package dev.cezarys8.fdserver.wallet.deposit;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,15 +14,6 @@ public class Deposit {
 	public Deposit() {
 		
 	}
-	
-//	public Deposit(Integer id, String username, String description, LocalDate targetDate, boolean done) {
-//		super();
-//		this.id = id;
-//		this.username = username;
-////		this.description = description;
-////		this.targetDate = targetDate;
-////		this.done = done;
-//	}
 
 	public Deposit(Integer id, String username, String name, Double interest, String bank, LocalDate maturityDate, LocalDate openingDate, BigDecimal amount, BigDecimal profit, BigDecimal tax, boolean isActive, String interestType, Integer currencyId) {
 		this.id = id;

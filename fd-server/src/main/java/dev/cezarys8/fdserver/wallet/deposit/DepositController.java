@@ -1,19 +1,18 @@
-package dev.cezarys8.fdserver.deposit;
+package dev.cezarys8.fdserver.wallet.deposit;
 
-import dev.cezarys8.fdserver.deposit.repository.DepositRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-public class DepositJpaResource {
+public class DepositController {
 	
 	private DepositService depositService;
 	
 	private DepositRepository depositRepository;
 	
-	public DepositJpaResource(DepositService depositService, DepositRepository depositRepository) {
+	public DepositController(DepositService depositService, DepositRepository depositRepository) {
 		this.depositService = depositService;
 		this.depositRepository = depositRepository;
 	}
@@ -39,7 +38,6 @@ public class DepositJpaResource {
 	@PutMapping("/users/{username}/deposits/{id}")
 	public Deposit updateDeposit(@PathVariable String username,
 			@PathVariable int id, @RequestBody Deposit deposit) {
-		//depositoService.updateDeposit(deposit);
 		depositRepository.save(deposit);
 		return deposit;
 	}

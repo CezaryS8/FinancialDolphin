@@ -29,6 +29,8 @@ import WelcomeComponent from '../welcome/WelcomeComponent'
 import AuthProvider, { useAuth } from '../security/AuthContext'
 import DepositComponent from '../deposits/DepositComponent'
 import AppBarComponent from '../header/HeaderComponent';
+import UserCryptocurrencyComponent from '../user_cryptocurrency/UserCryptocurrencyComponent';
+import UserCryptocurrenciesComponent from '../user_cryptocurrency/UserCryptocurrenciesComponent';
 
 const drawerWidth = 240;
 
@@ -162,6 +164,28 @@ export default function SidenavComponent() {
               <ListItemText primary="Deposits" sx={{ opacity: open ? 1 : 0 }}/>
             </ListItemButton>
           </ListItem>
+          <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              component={Link}
+              to="/cryptocurrencies"
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                <FaBeer />
+              </ListItemIcon>
+              <ListItemText primary="Cryptocurrencies" sx={{ opacity: open ? 1 : 0 }}/>
+            </ListItemButton>
+          </ListItem>
         </List>
         <Divider />
       </Drawer> }
@@ -188,6 +212,19 @@ export default function SidenavComponent() {
               <DepositComponent />
             </AuthenticatedRoute>
           } />
+
+          <Route path='/cryptocurrencies' element={
+            <AuthenticatedRoute>
+              <UserCryptocurrenciesComponent />
+            </AuthenticatedRoute>
+          } />
+
+          <Route path='/cryptocurrency/:id' element={
+            <AuthenticatedRoute>
+              <UserCryptocurrencyComponent />
+            </AuthenticatedRoute>
+          } />
+
 
           <Route path='/logout' element={
             <AuthenticatedRoute>

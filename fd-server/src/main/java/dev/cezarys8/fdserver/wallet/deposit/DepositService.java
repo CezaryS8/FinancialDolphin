@@ -1,4 +1,4 @@
-package dev.cezarys8.fdserver.deposit;
+package dev.cezarys8.fdserver.wallet.deposit;
 
 import org.springframework.stereotype.Service;
 
