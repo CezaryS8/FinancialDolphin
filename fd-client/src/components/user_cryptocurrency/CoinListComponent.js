@@ -60,7 +60,7 @@ export default function CoinListComponent(props) {
     return (
         <div>
             TODO: SELECT MULI
-            <FormControl fullWidth>
+            {/* <FormControl fullWidth>
                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
                     Coin
                 </InputLabel>
@@ -81,7 +81,7 @@ export default function CoinListComponent(props) {
                     }
 
                 </NativeSelect>
-            </FormControl>
+            </FormControl> */}
             Powered by CoinGecko
             <ul>
             {

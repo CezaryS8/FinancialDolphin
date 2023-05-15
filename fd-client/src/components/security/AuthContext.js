@@ -61,16 +61,17 @@ export default function AuthProvider({ children }) {
     //     }
     // }
 
-
+    
     async function login(username, password) {
-
+        debugger
         try {
 
             const response = await executeJwtAuthenticationService(username, password)
 
             if(response.status==200){
                 
-                const jwtToken = 'Bearer ' + response.data.token
+                // const jwtToken = response.data.access_token
+                const jwtToken = 'Bearer ' + response.data.access_token
                 
                 setAuthenticated(true)
                 setUsername(username)
