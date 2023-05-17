@@ -74,7 +74,7 @@ function UserCryptocurrenciesComponent() {
         <>
             <Box height={100} />
             <div className="container">
-                <p></p>
+                {/* <p></p> */}
                 <div className="row">
                     <div className="col-6">
                         <h1 className="text-start">Total cryptocurrencies: {userCryptocurrencies.length}</h1>

@@ -24,20 +24,18 @@ export default function SmallCardWithChooseDateComponent(props) {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoItem label={props.text}>
-              <DatePicker onChange={(date) => handleDatePickerChange(date)} defaultValue={dayjs('2022-01-01')} />
-            </DemoItem>
-          </LocalizationProvider> 
 
-        </Typography>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoItem label={props.text}>
+            <DatePicker onChange={(date) => handleDatePickerChange(date)} defaultValue={dayjs('2022-01-01')} />
+          </DemoItem>
+        </LocalizationProvider>
+
         <Typography variant="h5" component="div">
           {props.amount}
           {interest}
         </Typography>
-        
+
       </CardContent>
     </Card>
   );
