@@ -29,8 +29,7 @@ import WelcomeComponent from '../welcome/WelcomeComponent'
 import AuthProvider, { useAuth } from '../security/AuthContext'
 import DepositComponent from '../deposits/DepositComponent'
 import AppBarComponent from '../header/HeaderComponent';
-import UserCryptocurrencyComponent from '../user_cryptocurrency/UserCryptocurrencyComponent';
-import UserCryptocurrenciesComponent from '../user_cryptocurrency/UserCryptocurrenciesComponent';
+
 
 const drawerWidth = 240;
 
@@ -81,7 +80,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function SidenavComponent() {
+export default function SidenavComponent({children}) {
   const authContext = useAuth()
   const isAuthenticated = authContext.isAuthenticated
   const username = authContext.username
@@ -95,15 +94,6 @@ export default function SidenavComponent() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  function AuthenticatedRoute({children}) {
-    const authContext = useAuth()
-    
-    if(authContext.isAuthenticated)
-        return children
-  
-    return <Navigate to="/" />
-  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -189,52 +179,8 @@ export default function SidenavComponent() {
         </List>
         <Divider />
       </Drawer> }
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-    
-        <Routes>
-          <Route path='/' element={<LoginComponent />} />
-          <Route path='/login' element={<LoginComponent />} />
-
-          <Route path='/welcome/:username' element={
-            <AuthenticatedRoute>
-              <WelcomeComponent />
-            </AuthenticatedRoute>
-          } />
-
-          <Route path='/deposits' element={
-            <AuthenticatedRoute>
-              <DepositsComponent />
-            </AuthenticatedRoute>
-          } />
-
-          <Route path='/deposit/:id' element={
-            <AuthenticatedRoute>
-              <DepositComponent />
-            </AuthenticatedRoute>
-          } />
-
-          <Route path='/cryptocurrencies' element={
-            <AuthenticatedRoute>
-              <UserCryptocurrenciesComponent />
-            </AuthenticatedRoute>
-          } />
-
-          <Route path='/cryptocurrency/:id' element={
-            <AuthenticatedRoute>
-              <UserCryptocurrencyComponent />
-            </AuthenticatedRoute>
-          } />
-
-
-          <Route path='/logout' element={
-            <AuthenticatedRoute>
-              <LogoutComponent />
-            </AuthenticatedRoute>
-          } />
-
-          <Route path='*' element={<ErrorComponent />} />
-
-        </Routes>
+      <Box component="main" sx={{ flexGrow: 1}}>
+        {children}
       </Box>
     </Box>
   );

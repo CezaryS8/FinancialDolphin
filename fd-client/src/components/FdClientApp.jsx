@@ -1,42 +1,76 @@
-import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import LogoutComponent from './logout/LogoutComponent'
-import HeaderComponent from './header/HeaderComponent'
 import ErrorComponent from './ErrorComponent'
 import WelcomeComponent from './welcome/WelcomeComponent'
-import LoginComponent from './login/LoginComponent'
-import AuthProvider, { useAuth } from './security/AuthContext'
+import AuthProvider from './security/AuthContext'
 import DepositsComponent from './deposits/DepositsComponent'
 import DepositComponent from './deposits/DepositComponent'
 import SidenavComponent from './drawer/SidenavComponent'
-import AppBarComponent from './header/HeaderComponent'
+import SignInSide from './login/SignInSide'
+import { useAuth } from './security/AuthContext'
+import UserCryptocurrenciesComponent from './user_cryptocurrency/UserCryptocurrenciesComponent'
+import UserCryptocurrencyComponent from './user_cryptocurrency/UserCryptocurrencyComponent'
 
-// function AuthenticatedRoute({children}) {
-//     const authContext = useAuth()
-    
-//     if(authContext.isAuthenticated)
-//         return children
+function AuthenticatedRoute({children}) {
+    const authContext = useAuth()
 
-//     return <Navigate to="/" />
-// }
+    if(authContext.isAuthenticated)
+        return children
+
+    return <Navigate to="/" />
+}
 
 export default function FdClientApp() {
     return (
         <div className="FdClientApp">
             <AuthProvider>
                 <BrowserRouter>
-                {/* <HeaderComponent /> */}
+                    <SidenavComponent>
+                        <Routes>
+                            <Route path='/' element={<SignInSide />} />
+                            <Route path='/login' element={<SignInSide />} />
 
-                {/* <Grid container spacing={0}>
-                    <Grid item xs={2}>
-                        <SidenavComponent />
-                    </Grid>
-                    <Grid item xs={10}>
-                        <Routes />
-                    </Grid>
-                    </Grid> */}
-                    {/* <AppBarComponent /> */}
-                    <SidenavComponent />
-                    
+                            <Route path='/welcome/:username' element={
+                                <AuthenticatedRoute>
+                                    <WelcomeComponent />
+                                </AuthenticatedRoute>
+                            } />
+
+                            <Route path='/deposits' element={
+                                <AuthenticatedRoute>
+                                    <DepositsComponent />
+                                </AuthenticatedRoute>
+                            } />
+
+                            <Route path='/deposit/:id' element={
+                                <AuthenticatedRoute>
+                                    <DepositComponent />
+                                </AuthenticatedRoute>
+                            } />
+
+                            <Route path='/cryptocurrencies' element={
+                                <AuthenticatedRoute>
+                                    <UserCryptocurrenciesComponent />
+                                </AuthenticatedRoute>
+                            } />
+
+                            <Route path='/cryptocurrency/:id' element={
+                                <AuthenticatedRoute>
+                                    <UserCryptocurrencyComponent />
+                                </AuthenticatedRoute>
+                            } />
+
+                            <Route path='/logout' element={
+                                <AuthenticatedRoute>
+                                    <LogoutComponent />
+                                </AuthenticatedRoute>
+                            } />
+
+                            <Route path='*' element={<ErrorComponent />} />
+
+                        </Routes>
+                    </SidenavComponent>
+
                     {/* <Routes>
                         
                         <Route path='/' element={ <LoginComponent /> } />
