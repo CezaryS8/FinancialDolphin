@@ -54,7 +54,7 @@ export default function CoinListComponent(props) {
                 .then(response => setTrendingCoinsSymbols(Array.from(response.data.data)))
                 .catch(error => console.log(error));
 
-        // console.log(data);
+        console.log(trendingCoinsSymbols);
     };
 
     return (

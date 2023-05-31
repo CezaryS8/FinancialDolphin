@@ -12,6 +12,7 @@ import { retrieveCoinList } from "../api/CryptocurrencyApiService"
 // import SmallCardComponent from "./SmallCardComponent"
 // import SmallCardWithChooseDateComponent from "./SmallCardWithChooseDateComponent"
 import CoinListComponent from "./CoinListComponent"
+import CryptocurrencyTable from "./CryptocurrencyTable"
 
 function UserCryptocurrenciesComponent() {
 
@@ -119,8 +120,10 @@ function UserCryptocurrenciesComponent() {
                     </table>
                 </div>
 
+
                 <div className="row">
-                    <CoinListComponent ownCoinsSymbols={userCryptocurrencies.map(cryptocurrency=>cryptocurrency.name)}></CoinListComponent>
+                    <CryptocurrencyTable />
+                    {/* <CoinListComponent ownCoinsSymbols={userCryptocurrencies.map(cryptocurrency=>cryptocurrency.name)}></CoinListComponent> */}
                 </div>
 
             </div>
