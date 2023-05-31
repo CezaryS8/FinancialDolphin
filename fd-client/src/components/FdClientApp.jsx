@@ -72,39 +72,6 @@ export default function FdClientApp() {
 
                         </Routes>
                     </SidenavComponent>
-
-                    {/* <Routes>
-                        
-                        <Route path='/' element={ <LoginComponent /> } />
-                        <Route path='/login' element={ <LoginComponent /> } />
-                        
-                        <Route path='/welcome/:username' element={
-                            <AuthenticatedRoute>
-                                <WelcomeComponent />
-                            </AuthenticatedRoute> 
-                        } />
-                        
-                        <Route path='/deposits' element={
-                            <AuthenticatedRoute>
-                                <DepositsComponent /> 
-                            </AuthenticatedRoute>
-                        } />
-
-                        <Route path='/deposit/:id' element={
-                            <AuthenticatedRoute>
-                                <DepositComponent /> 
-                            </AuthenticatedRoute>
-                        } />
-                
-                        <Route path='/logout' element={
-                            <AuthenticatedRoute>
-                                <LogoutComponent /> 
-                            </AuthenticatedRoute>
-                        } />
-                        
-                        <Route path='*' element={<ErrorComponent /> } />
-                        
-                    </Routes>  */}
                 </BrowserRouter>
             </AuthProvider>
         </div>

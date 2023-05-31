@@ -22,6 +22,8 @@ public class AuthenticationController {
   public ResponseEntity<AuthenticationResponse> register(
       @RequestBody RegisterRequest request
   ) {
+    //TODO: add email duplicate validation
+
     return ResponseEntity.ok(service.register(request));
   }
   @PostMapping("/authenticate")

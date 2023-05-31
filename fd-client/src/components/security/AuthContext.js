@@ -2,7 +2,6 @@ import { createContext, useContext, useState } from "react";
 import { apiClient } from "../api/ApiClient";
 import { executeJwtAuthenticationService } from "../api/AuthenticationApiService";
 
-//1: Create a Context
 export const AuthContext = createContext()
 
 export const useAuth = () => useContext(AuthContext)
@@ -47,13 +46,12 @@ export default function AuthProvider({ children }) {
         }
     }
 
-
     function logout() {
         setAuthenticated(false)
         setToken(null)
         setUsername(null)
     }
-
+    
     return (
         <AuthContext.Provider value={ {isAuthenticated, login, logout, username, token}  }>
             {children}

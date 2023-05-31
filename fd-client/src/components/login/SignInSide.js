@@ -43,10 +43,7 @@ export default function SignInSide() {
     debugger
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    
     if (await authContext.login(data.get('email'), data.get('password'))) {
       navigate(`/welcome/${data.get('email')}`)
     } else {
@@ -135,7 +132,7 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/register" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

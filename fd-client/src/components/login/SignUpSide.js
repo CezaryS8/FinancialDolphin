@@ -12,31 +12,90 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Alert from '@mui/material/Alert';
+import { createUserApi } from '../api/AuthenticationApiService';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function Copyright(props) {
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function validatePassword(password) {
+  return password.length >= 6;
+}
+
+function validateName(name) {
+  return name.length >= 2;
+}
+
+function validateForm(user) {
+  const isValidFirstname = validateName(user.firstname);
+  const isValidLastname = validateName(user.lastname);
+  const isValidEmail = validateEmail(user.email);
+  const isValidPassword = validatePassword(user.password);
+
+  return {
+    isValidFirstname,
+    isValidLastname,
+    isValidEmail,
+    isValidPassword,
+  };
+}
+
+function ErrorAlert({ show, message }) {
+  if (!show) {
+    return null;
+  }
+
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+    <Alert variant="outlined" severity="warning">
+      {message}
+    </Alert>
   );
 }
 
-const defaultTheme = createTheme();
+function SignUpSite() {
+  const [showFirstnameErrorMessage, setShowFirstnameErrorMessage] = useState(false);
+  const [showLastnameErrorMessage, setShowLastnameErrorMessage] = useState(false);
+  const [showEmailErrorMessage, setShowEmailErrorMessage] = useState(false);
+  const [showPasswordErrorMessage, setShowPasswordErrorMessage] = useState(false);
 
-export default function SignUpSite() {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const user = {
+      firstname: data.get('firstname'),
+      lastname: data.get('lastname'),
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+
+    const validation = validateForm(user);
+
+    setShowFirstnameErrorMessage(!validation.isValidFirstname);
+    setShowLastnameErrorMessage(!validation.isValidLastname);
+    setShowEmailErrorMessage(!validation.isValidEmail);
+    setShowPasswordErrorMessage(!validation.isValidPassword);
+
+    if (
+      validation.isValidFirstname &&
+      validation.isValidLastname &&
+      validation.isValidEmail &&
+      validation.isValidPassword
+    ) {
+      createUserApi(user.firstname, user.lastname, user.email, user.password)
+        .then((response) => {
+          navigate('/login');
+        })
+        .catch((error) => console.log(error));
+    }
   };
+
+  const defaultTheme = createTheme();
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -53,18 +112,25 @@ export default function SignUpSite() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
+          <Typography component="h1" variant="h3">
+            Financial Dolphin
+          </Typography>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          <ErrorAlert show={showFirstnameErrorMessage} message="Firstname must have at least 2 characters." />
+          <ErrorAlert show={showLastnameErrorMessage} message="Lastname must have at least 2 characters." />
+          <ErrorAlert show={showEmailErrorMessage} message="Please enter a valid email." />
+          <ErrorAlert show={showPasswordErrorMessage} message="Password must have at least 6 characters." />
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="firstname"
                   required
                   fullWidth
-                  id="firstName"
+                  id="firstname"
                   label="First Name"
                   autoFocus
                 />
@@ -73,9 +139,9 @@ export default function SignUpSite() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="lastname"
                   label="Last Name"
-                  name="lastName"
+                  name="lastname"
                   autoComplete="family-name"
                 />
               </Grid>
@@ -107,25 +173,21 @@ export default function SignUpSite() {
                 />
               </Grid>
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
 }
+
+export default SignUpSite;
