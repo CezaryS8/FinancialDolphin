@@ -15,21 +15,20 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../security/AuthContext'
+import Alert from '@mui/material/Alert';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="">
+        Financial Dolphin
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
 }
-
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
@@ -83,12 +82,19 @@ export default function SignInSide() {
               alignItems: 'center',
             }}
           >
+            <Typography component="h1" variant="h3">
+              Financial Dolphin
+            </Typography>
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+            {showErrorMessage && 
+            <Alert variant="outlined" severity="warning">
+              Authentication Failed. Please check your credentials.
+            </Alert> }
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"

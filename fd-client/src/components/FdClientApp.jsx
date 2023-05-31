@@ -7,6 +7,7 @@ import DepositsComponent from './deposits/DepositsComponent'
 import DepositComponent from './deposits/DepositComponent'
 import SidenavComponent from './drawer/SidenavComponent'
 import SignInSide from './login/SignInSide'
+import SignUpSide from './login/SignUpSide'
 import { useAuth } from './security/AuthContext'
 import UserCryptocurrenciesComponent from './user_cryptocurrency/UserCryptocurrenciesComponent'
 import UserCryptocurrencyComponent from './user_cryptocurrency/UserCryptocurrencyComponent'
@@ -29,6 +30,7 @@ export default function FdClientApp() {
                         <Routes>
                             <Route path='/' element={<SignInSide />} />
                             <Route path='/login' element={<SignInSide />} />
+                            <Route path='/register' element={<SignUpSide />} />
 
                             <Route path='/welcome/:username' element={
                                 <AuthenticatedRoute>

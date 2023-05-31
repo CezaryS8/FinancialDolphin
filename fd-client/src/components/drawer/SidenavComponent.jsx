@@ -99,7 +99,8 @@ export default function SidenavComponent({children}) {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
 
-      <AppBarComponent open={open} handleDrawerOpen={handleDrawerOpen} handleDrawerClose={handleDrawerClose} />
+      {isAuthenticated &&
+      <AppBarComponent open={open} handleDrawerOpen={handleDrawerOpen} handleDrawerClose={handleDrawerClose} /> }
 
       {isAuthenticated &&
       <Drawer variant="permanent" open={open}>
