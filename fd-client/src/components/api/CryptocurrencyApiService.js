@@ -1,3 +1,4 @@
+import { apiClient } from './ApiClient'
 // https://www.coingecko.com/pl/api/documentation
 
 export const retrieveCoinList = (currency) => 
@@ -9,4 +10,5 @@ export const retrieveCoinSymbolList = () =>
 export const retrieveCoin = (coinSymbol) => 
     `https://api.coingecko.com/api/v3/coins/${coinSymbol}`
 
-
+export const retrieveAllCryptocurrenciesApi = () =>
+    apiClient.get(`/cryptocurrencies`)

@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { retrieveAllCryptocurrenciesApi } from '../api/CryptocurrencyApiService';
+import { Avatar } from '@mui/material';
 
 export default function CryptocurrencyTable() {
   const [cryptocurrencies, setCryptocurrencies] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://api.coingecko.com/api/v3/coins/list');
+  function refreshDeposits() {
+    retrieveAllCryptocurrenciesApi()
+      .then(response => {
+        debugger
         setCryptocurrencies(response.data);
-      } catch (error) {
-        console.error('Error fetching cryptocurrencies:', error);
-      }
-    };
-
-    fetchData();
+      })
+      .catch(error => console.log('Error fetching cryptocurrencies:', error))
+  }
+  useEffect(() => {
+    refreshDeposits();
   }, []);
 
   return (
@@ -22,17 +22,19 @@ export default function CryptocurrencyTable() {
       <table>
         <thead>
           <tr>
+            <th>Image</th>
             <th>ID</th>
-            <th>Name</th>
             <th>Symbol</th>
+            <th>Current Price</th>
           </tr>
         </thead>
         <tbody>
           {cryptocurrencies.map(crypto => (
             <tr key={crypto.id}>
+              <td><Avatar alt={crypto.id} src={crypto.image} /></td>
               <td>{crypto.id}</td>
-              <td>{crypto.name}</td>
               <td>{crypto.symbol}</td>
+              <td>{crypto.currentPrice} $</td>
             </tr>
           ))}
         </tbody>
