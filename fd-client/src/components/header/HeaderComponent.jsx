@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom'
 import { useAuth } from '../security/AuthContext'
+import { FaBeer } from 'react-icons/fa';
 
 const drawerWidth = 240;
 
@@ -68,26 +69,26 @@ export default function Header(props) {
         <AppBar className="header" position="fixed" open={open}>
             <Toolbar>
                 {isAuthenticated &&
-                <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={handleDrawerOpen}
-                    edge="start"
-                    sx={{
-                        marginRight: 5,
-                        ...(open && { display: 'none' }),
-                    }}
-                >
-                    <MenuIcon />
-                </IconButton>}
-
-                <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
+                        sx={{
+                            marginRight: 5,
+                            ...(open && { display: 'none' }),
+                        }}
+                    >
+                        <MenuIcon />
+                    </IconButton>}
+                <FaBeer />
                 <Typography
                     variant="h6"
                     noWrap
                     component="a"
                     href="/"
                     sx={{
+                        ml: 2,
                         mr: 2,
                         display: { xs: 'none', md: 'flex' },
                         fontFamily: 'monospace',
@@ -206,7 +207,7 @@ export default function Header(props) {
                                     Dashboard
                                 </Typography>
                             </MenuItem>
-                            <MenuItem key="login" onClick={() => {handleCloseUserMenu(); logout();}}>
+                            <MenuItem key="login" onClick={() => { handleCloseUserMenu(); logout(); }}>
                                 <Typography textAlign="center">
                                     <Link className="nav-link" to="/logout">Logout</Link>
                                 </Typography>
@@ -214,7 +215,7 @@ export default function Header(props) {
                         </Menu>
                     </Box>}
 
-                    {!isAuthenticated &&
+                {!isAuthenticated &&
                     <Box sx={{ flexGrow: 0 }}>
                         <MenuItem key="login" onClick={handleCloseUserMenu}>
                             <Typography textAlign="center">

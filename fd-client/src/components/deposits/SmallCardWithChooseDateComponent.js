@@ -32,8 +32,8 @@ export default function SmallCardWithChooseDateComponent(props) {
         </LocalizationProvider>
 
         <Typography variant="h5" component="div">
-          {props.amount}
-          {interest}
+          {props.amount} 
+          {interest} zł
         </Typography>
 
       </CardContent>

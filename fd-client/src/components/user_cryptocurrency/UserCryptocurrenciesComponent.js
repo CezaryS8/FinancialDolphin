@@ -3,15 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { retrieveAllUserCryptocurrenciesForUsernameApi, deleteUserCryptocurrencyApi } from "../api/UserCryptocurrencyApiService"
 import { useAuth } from "../security/AuthContext"
 import { Box } from "@mui/material"
-// import './Deposits.css';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import { retrieveCoinList } from "../api/CryptocurrencyApiService"
-// import DepositMenuButton from './DepositMenuButton'
-// import ExampleChartComponent from "./ExampleChartComponent"
-// import SmallCardComponent from "./SmallCardComponent"
-// import SmallCardWithChooseDateComponent from "./SmallCardWithChooseDateComponent"
-import CoinListComponent from "./CoinListComponent"
 import CryptocurrencyTable from "./CryptocurrencyTable"
 
 function UserCryptocurrenciesComponent() {
@@ -21,8 +14,6 @@ function UserCryptocurrenciesComponent() {
     const navigate = useNavigate()
     const [userCryptocurrencies, setUserCryptocurrencies] = useState([])
     const [message, setMessage] = useState(null)
-
-    const [coinData, setCoinData] = useState([])
 
     useEffect(() => refreshUserCryptocurrencies(), [])
 
@@ -74,6 +65,7 @@ function UserCryptocurrenciesComponent() {
     return (
         <>
             <Box height={100} />
+            
             <div className="container">
                 {/* <p></p> */}
                 <div className="row">
@@ -91,7 +83,7 @@ function UserCryptocurrenciesComponent() {
 
                 {message && <div className="alert alert-warning">{message}</div>}
 
-                <div className="row">
+                <div className="row ">
                     <table className="table">
                         <thead>
                             <tr>
@@ -110,7 +102,6 @@ function UserCryptocurrenciesComponent() {
                                             <td>{userCryptocurrency.openingDate}</td>
                                             <td>{userCryptocurrency.amount}</td>
                                             <td>{userCryptocurrency.currencyId}</td>
-                                            {/* <td><DepositMenuButton id={userCryptocurrency.id} onDelete={handleDelete}></DepositMenuButton></td> */}
                                         </tr>
                                     )
                                 )

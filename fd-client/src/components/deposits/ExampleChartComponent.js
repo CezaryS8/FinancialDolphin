@@ -1,6 +1,11 @@
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { groupBy } from 'lodash';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const groupDepositsByMonth = (deposits, year) => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -48,17 +53,28 @@ export default class ExampleChartComponent extends PureComponent {
 
         return (
             <div>
-                <select value={selectedYear} onChange={this.handleYearChange}>
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
-                    <option value="2020">2020</option>
-                    <option value="2019">2019</option>
-                    <option value="2018">2018</option>
-                </select>
+                <Box sx={{ minWidth: 120 }}>
+                    <FormControl >
+                        <InputLabel id="year-select-label">year</InputLabel>
+                        <Select
+                            labelId="year-select-label"
+                            id="year-select"
+                            label="Year"
+                            value={selectedYear}
+                            onChange={this.handleYearChange}
+                        >
+                            <MenuItem value={2023}>2023</MenuItem>
+                            <MenuItem value={2022}>2022</MenuItem>
+                            <MenuItem value={2021}>2021</MenuItem>
+                            <MenuItem value={2020}>2020</MenuItem>
+                            <MenuItem value={2019}>2019</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+
                 <div style={{ width: "100%", height: 300 }}>
                     <ResponsiveContainer>
-                        <BarChart  data={groupedDeposits}>
+                        <BarChart data={groupedDeposits}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" />
                             <YAxis />

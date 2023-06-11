@@ -15,7 +15,7 @@ export default function SmallCardComponent(props) {
           {props.text}
         </Typography>
         <Typography variant="h5" component="div">
-          {props.amount}
+          {props.amount} zł
         </Typography>
       </CardContent>
     </Card>

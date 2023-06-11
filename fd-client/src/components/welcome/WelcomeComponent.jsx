@@ -41,10 +41,6 @@ function WelcomeComponent() {
                 <div>
                     Manage your finances - <Link to="/deposits">Go here</Link>
                 </div>
-                <div>
-                    <button className="btn btn-success m-5" onClick={callHelloWorldRestApi}>
-                        Call Hello World</button>
-                </div>
                 <div className="text-info">{message}</div>
             </div>
         </>
