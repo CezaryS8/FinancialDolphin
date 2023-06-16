@@ -1,8 +1,8 @@
 # FinancialDolphin
-Smart financial manager web application
+Smart financial manager web application. 
 
-1.	Wykorzystane technologie
-1.1.	 Backend
+Wykorzystane technologie <br>
+1.   Backend <br>
 •	Java 17
 •	Spring
 •	Spring Boot 3
@@ -14,7 +14,7 @@ Smart financial manager web application
 •	Maven
 •	Postman
 •	Json
-1.2.	 Frontend
+2.   Frontend <br>
 •	JavaScript
 •	Css
 •	React
