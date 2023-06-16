@@ -44,7 +44,6 @@ export default function CoinListComponent(props) {
 
     return (
         <div>
-            Powered by CoinGecko
             <ul>
             {
                 ownTrendingCoins.map(
@@ -52,7 +51,6 @@ export default function CoinListComponent(props) {
                         <li key={coin.id}>{coin.name} i {coin.id}</li>
                     )
                 )
-
             }
             </ul>
             

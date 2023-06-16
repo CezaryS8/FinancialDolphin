@@ -35,7 +35,7 @@ export default function DepositMenuButton(props) {
         deleteDepositApi(username, id)
             .then(
                 () => {
-                    props.onDelete(props.id) // calling the callback function
+                    props.onDelete(props.id)
                 }
             )
             .catch(error => console.log(error))

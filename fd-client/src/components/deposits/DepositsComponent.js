@@ -8,7 +8,7 @@ import './Deposits.css';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import DepositMenuButton from './DepositMenuButton'
-import ExampleChartComponent from "./ExampleChartComponent"
+import DepositChartComponent from "./DepositChartComponent"
 import SmallCardComponent from "./SmallCardComponent"
 import SmallCardWithChooseDateComponent from "./SmallCardWithChooseDateComponent"
 
@@ -149,7 +149,7 @@ function DepositsComponent() {
 
                 <div className="row">
                     <div className="col-md-8">
-                        <ExampleChartComponent deposits={deposits}></ExampleChartComponent>
+                        <DepositChartComponent deposits={deposits}></DepositChartComponent>
                     </div>
                     <div className="col-md-4">
                         <div className="row">

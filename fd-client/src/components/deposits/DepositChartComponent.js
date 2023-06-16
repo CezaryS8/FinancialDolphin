@@ -30,7 +30,7 @@ const groupDepositsByMonth = (deposits, year) => {
     return result;
 };
 
-export default class ExampleChartComponent extends PureComponent {
+export default class DepositChartComponent extends PureComponent {
     constructor(props) {
         super(props);
 
