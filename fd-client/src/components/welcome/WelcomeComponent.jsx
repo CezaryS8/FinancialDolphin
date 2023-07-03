@@ -40,7 +40,14 @@ function WelcomeComponent() {
             })
             .catch(error => console.log(error))
     }
-
+    function getNamesAndSumsOfInvestements() {
+        const data = [
+            { name: 'Deposits', value: sumOfActiveDeposits },
+            { name: 'Cryptocurrencies', value: sumOfCryptocurrencies }
+        ];
+        console.log(data);
+        return data;
+    }
 
     // function callHelloWorldRestApi() {
     //     console.log('called')
@@ -81,7 +88,7 @@ function WelcomeComponent() {
                 </div>
                 <div className="row m-4" style={{ height: '50vh' }}>
                     <div className="col-lg-6">
-                        <OverviewDiversityPieChartComponent />
+                        <OverviewDiversityPieChartComponent data={getNamesAndSumsOfInvestements()}></OverviewDiversityPieChartComponent>
                     </div>
                     <div className="col-lg-6">
                         <OverviewDiversityAreaChartComponent />
