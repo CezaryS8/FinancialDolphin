@@ -6,6 +6,8 @@ import { Box } from '@mui/material'
 import OverviewCardComponent from './OverviewCardComponent'
 import { retrieveSumOfUserActiveDepositsApi } from '../api/DepositApiService'
 import { retrieveSumOfUserCryptocurrenciesApi } from '../api/CryptocurrencyApiService'
+import OverviewDiversityAreaChartComponent from './OverviewDiversityAreaChartComponent'
+import OverviewDiversityPieChartComponent from './OverviewDiversityPieChartComponent'
 
 
 function WelcomeComponent() {
@@ -66,21 +68,27 @@ function WelcomeComponent() {
             <div className="WelcomeComponent">
                 <h1>Welcome {username}</h1>
 
-                <div className="row p-4">
-                    <div className="col-md-4 p-2">
-                        <OverviewCardComponent text="Deposits" amount={sumOfActiveDeposits} ></OverviewCardComponent>
+                <div className="row m-4">
+                    <div className="col-lg-4 col-md-6 p-2">
+                        <OverviewCardComponent text="Deposits" amount={sumOfActiveDeposits}></OverviewCardComponent>
                     </div>
-                    <div className="col-md-4 p-2">
+                    <div className="col-lg-4 col-md-6 p-2">
                         <OverviewCardComponent text="Cryptocurrencies" amount={sumOfCryptocurrencies}></OverviewCardComponent>
                     </div>
-                    <div className="col-md-4 p-2">
+                    <div className="col-lg-4 col-md-12 p-2">
                         <OverviewCardComponent text="???" amount="1000"></OverviewCardComponent>
                     </div>
                 </div>
+                <div className="row m-4" style={{ height: '50vh' }}>
+                    <div className="col-lg-6">
+                        <OverviewDiversityPieChartComponent />
+                    </div>
+                    <div className="col-lg-6">
+                        <OverviewDiversityAreaChartComponent />
+                    </div>
 
-                <div>
-                    Manage your finances - <Link to="/deposits">Go here</Link>
                 </div>
+
                 <div className="text-info">{message}</div>
             </div>
         </>

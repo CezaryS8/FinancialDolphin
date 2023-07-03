@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 
 export default function OverviewCardComponent(props) {
   return (
-    <Card sx={{ minWidth: 200, backgroundColor: '#004BA8 ' }}>
+    <Card sx={{ minWidth: 100, backgroundColor: '#004BA8 ' }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="#FFD700 " gutterBottom>
           {props.text}
