@@ -12,3 +12,6 @@ export const retrieveCoin = (coinSymbol) =>
 
 export const retrieveAllCryptocurrenciesApi = () =>
     apiClient.get(`/cryptocurrencies`)
+
+export const retrieveSumOfUserCryptocurrenciesApi
+    = (username) => apiClient.get(`/users/${username}/cryptocurrencies/total_active_amount`)

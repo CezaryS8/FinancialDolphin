@@ -66,7 +66,7 @@ export default function Header(props) {
     };
 
     return (
-        <AppBar className="header" position="fixed" open={open}>
+        <AppBar sx={{ backgroundColor: '#004BA8 ' }} className="header" position="fixed" open={open}>
             <Toolbar>
                 {isAuthenticated &&
                     <IconButton

@@ -4,6 +4,7 @@ import dev.cezarys8.fdserver.wallet.cryptocurrency.CryptocurrencyRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -21,7 +22,6 @@ public class CryptocurrencyController {
     }
 
     @GetMapping("/cryptocurrencies/{id}")
-    public Cryptocurrency retrieveCryptocurrency(@PathVariable int id) {
-        return cryptocurrencyRepository.findById(id).get();
+    public Cryptocurrency retrieveCryptocurrency(@PathVariable int id) {return cryptocurrencyRepository.findById(id).get();
     }
 }

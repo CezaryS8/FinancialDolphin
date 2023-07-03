@@ -14,3 +14,6 @@ export const updateDepositApi
 
 export const createDepositApi
     = (username,  deposit) => apiClient.post(`/users/${username}/deposits`, deposit)
+
+export const retrieveSumOfUserActiveDepositsApi
+    = (username) => apiClient.get(`/users/${username}/deposits/total_active_amount`)

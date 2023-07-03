@@ -4,6 +4,7 @@ import dev.cezarys8.fdserver.wallet.deposit.Deposit;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -49,4 +50,8 @@ public class UserCryptocurrencyController {
         return userCryptocurrencyRepository.save(userCryptocurrency);
     }
 
+    @GetMapping("/users/{username}/cryptocurrencies/total_active_amount")
+    public BigDecimal getSumOfUserCryptocurrencies(@PathVariable String username) {
+        return userCryptocurrencyRepository.getSumOfUserCryptocurrencies(username);
+    }
 }

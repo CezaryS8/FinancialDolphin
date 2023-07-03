@@ -3,6 +3,8 @@ package dev.cezarys8.fdserver.wallet.deposit;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -20,6 +22,10 @@ public class DepositController {
 	
 	@GetMapping("/users/{username}/deposits")
 	public List<Deposit> retrieveDeposits(@PathVariable String username) {
+		//ONLY FOR TEST - DELETE IN PROD
+		LocalDate today = LocalDate.now();
+		depositRepository.updateIsActiveByMaturityDate(today);
+
 		return depositRepository.findByUsername(username);
 	}
 
@@ -46,9 +52,12 @@ public class DepositController {
 	@PostMapping("/users/{username}/deposits")
 	public Deposit createDeposit(@PathVariable String username,
 			 @RequestBody Deposit deposit) {
-//		deposit.setUsername(username);
-//		deposit.setId(null);
 		return depositRepository.save(deposit);
+	}
+
+	@GetMapping("/users/{username}/deposits/total_active_amount")
+	public BigDecimal getSumOfUserActiveDeposits(@PathVariable String username) {
+		return depositRepository.getSumOfUserActiveDeposits(username);
 	}
 
 }

@@ -52,9 +52,7 @@ function DepositsComponent() {
         retrieveAllDepositsForUsernameApi(username)
             .then(response => {
                 setDeposits(response.data)
-            }
-
-            )
+            })
             .catch(error => console.log(error))
     }
 
