@@ -17,32 +17,32 @@ public class UserCryptocurrencyController {
     }
 
     @GetMapping("/users/{username}/cryptocurrencies")
-    public List<UserCryptocurrency> retrieveUserCryptocurrency(@PathVariable String username) {
+    public List<UserCryptocurrency> retrieveUserCryptocurrencies(@PathVariable String username) {
         return userCryptocurrencyRepository.findByUsername(username);
     }
 
     @GetMapping("/users/{username}/cryptocurrencies/{id}")
-    public UserCryptocurrency retrieveCryptocurrency(@PathVariable String username,
+    public UserCryptocurrency retrieveUserCryptocurrency(@PathVariable String username,
                                    @PathVariable int id) {
         return userCryptocurrencyRepository.findById(id).get();
     }
 
     @DeleteMapping("/users/{username}/cryptocurrencies/{id}")
-    public ResponseEntity<Void> deleteDeposit(@PathVariable String username,
+    public ResponseEntity<Void> deleteUserCryptocurrency(@PathVariable String username,
                                               @PathVariable int id) {
         userCryptocurrencyRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/users/{username}/cryptocurrencies/{id}")
-    public UserCryptocurrency updateDeposit(@PathVariable String username,
+    public UserCryptocurrency updateUserCryptocurrency(@PathVariable String username,
                                  @PathVariable int id, @RequestBody UserCryptocurrency userCryptocurrency) {
         userCryptocurrencyRepository.save(userCryptocurrency);
         return userCryptocurrency;
     }
 
     @PostMapping("/users/{username}/cryptocurrencies")
-    public UserCryptocurrency createDeposit(@PathVariable String username,
+    public UserCryptocurrency createUserCryptocurrency(@PathVariable String username,
                                  @RequestBody UserCryptocurrency userCryptocurrency) {
         userCryptocurrency.setUsername(username);
         userCryptocurrency.setId(null);

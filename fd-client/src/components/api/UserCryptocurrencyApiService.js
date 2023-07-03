@@ -7,10 +7,10 @@ export const deleteUserCryptocurrencyApi
     = (username, id) => apiClient.delete(`/users/${username}/cryptocurrencies/${id}`)
 
 export const retrieveUserCryptocurrencyApi
-    = (username, id) => apiClient.get(`/users/${username}/cryptocurrencies/${id}`)
+    = (username, userCryptocurrency) => apiClient.get(`/users/${username}/cryptocurrencies/${userCryptocurrency}`)
 
 export const updateUserCryptocurrencyApi
-    = (username, id, deposit) => apiClient.put(`/users/${username}/cryptocurrencies/${id}`, deposit)
+    = (username, id, userCryptocurrency) => apiClient.put(`/users/${username}/cryptocurrencies/${id}`, userCryptocurrency)
 
 export const createUserCryptocurrencyApi
-    = (username,  deposit) => apiClient.post(`/users/${username}/cryptocurrencies`, deposit)
+    = (username,  userCryptocurrency) => apiClient.post(`/users/${username}/cryptocurrencies`, userCryptocurrency)

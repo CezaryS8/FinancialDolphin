@@ -46,8 +46,8 @@ public class DepositController {
 	@PostMapping("/users/{username}/deposits")
 	public Deposit createDeposit(@PathVariable String username,
 			 @RequestBody Deposit deposit) {
-		deposit.setUsername(username);
-		deposit.setId(null);
+//		deposit.setUsername(username);
+//		deposit.setId(null);
 		return depositRepository.save(deposit);
 	}
 

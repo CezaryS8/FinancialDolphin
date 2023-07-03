@@ -40,6 +40,7 @@ export default function UserCryptocurrencyComponent() {
     }
 
     function onSubmit(values) {
+        debugger
         console.log(values)
 
         const userCryptocurrency = {
@@ -56,14 +57,14 @@ export default function UserCryptocurrencyComponent() {
         if (id == -1) {
             createUserCryptocurrencyApi(username, userCryptocurrency)
                 .then(response => {
-                    navigate('/cryptocurrenties')
+                    navigate('/cryptocurrencies')
                 })
                 .catch(error => console.log(error))
 
         } else {
             updateUserCryptocurrencyApi(username, id, userCryptocurrency)
                 .then(response => {
-                    navigate('/cryptocurrenties')
+                    navigate('/cryptocurrencies')
                 })
                 .catch(error => console.log(error))
         }
@@ -74,13 +75,13 @@ export default function UserCryptocurrencyComponent() {
             // description: 'Enter a valid description',
             // targetDate: 'Enter a valid target date'
         }
-
+        debugger
         if (values.name.length < 5) {
             errors.name = 'Enter atleast 5 characters'
         }
 
-        if (values.maturityDate == null || values.openingDate == '' || !moment(values.openingDate).isValid()) {
-            errors.maturityDate = 'Enter an opening date'
+        if (values.openingDate == null || values.openingDate == '' || !moment(values.openingDate).isValid()) {
+            errors.openingDate = 'Enter correct opening date'
         }
 
         console.log(values)
