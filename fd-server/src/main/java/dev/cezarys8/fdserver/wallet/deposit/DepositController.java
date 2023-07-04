@@ -60,4 +60,9 @@ public class DepositController {
 		return depositRepository.getSumOfUserActiveDeposits(username);
 	}
 
+	@GetMapping("/users/{username}/deposits/total_active_cumulative_amount/{year}")
+	public BigDecimal[] getMonthlyCumulativeValues(@PathVariable int year) {
+		return depositService.getMonthlyCumulativeValues(year);
+	}
+
 }

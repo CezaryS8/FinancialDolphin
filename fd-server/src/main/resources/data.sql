@@ -29,8 +29,11 @@ INSERT INTO public.deposit (id, amount, bank, currency_id, interest, interest_ty
 VALUES (10, 10000.00, 'PKO', 1, 10, 'STALA', true, '2023-09-01', 'Lokata 10', '2023-05-01', 0.00, 0.00, 'czarek@wp.pl');
 
 INSERT INTO public.user_cryptocurrency (id, amount, currency_id, name, opening_date, username)
-VALUES (1, 100.00, 1, 'bitcoin', '2022-05-03', 'czarek@wp.pl');
+VALUES (1, 1000.00, 1, 'bitcoin', '2022-05-03', 'czarek@wp.pl');
 
 INSERT INTO public.user_cryptocurrency (id, amount, currency_id, name, opening_date, username)
 VALUES (2, 10.00, 1, 'Bitcoin', '2022-05-03', 'czarek@wp.pl');
+
+INSERT INTO public.user_cryptocurrency (id, amount, currency_id, name, opening_date, username)
+VALUES (3, 1000.00, 1, 'etherum', '2023-05-03', 'czarek@wp.pl');
 

@@ -4,7 +4,7 @@ import { retrieveHelloWorldPathVariable } from '../api/HelloWorldApiService'
 import { useAuth } from '../security/AuthContext'
 import { Box } from '@mui/material'
 import OverviewCardComponent from './OverviewCardComponent'
-import { retrieveSumOfUserActiveDepositsApi } from '../api/DepositApiService'
+import { retrieveMonthlyCumulativeSumOfUserActiveDepositsApi, retrieveSumOfUserActiveDepositsApi } from '../api/DepositApiService'
 import { retrieveSumOfUserCryptocurrenciesApi } from '../api/CryptocurrencyApiService'
 import OverviewDiversityAreaChartComponent from './OverviewDiversityAreaChartComponent'
 import OverviewDiversityPieChartComponent from './OverviewDiversityPieChartComponent'
@@ -24,6 +24,7 @@ function WelcomeComponent() {
     useEffect(() => {
         refreshSumOfDeposits();
         refreshSumOfCryptocurrencies();
+        refreshMonthlyCumulativeSumOfDeposits();
     }, [])
 
     function refreshSumOfDeposits() {
@@ -40,6 +41,14 @@ function WelcomeComponent() {
             })
             .catch(error => console.log(error))
     }
+    function refreshMonthlyCumulativeSumOfDeposits() {
+        retrieveMonthlyCumulativeSumOfUserActiveDepositsApi(username, 2023)
+            .then(response => {
+                // TODO
+                console.log(response.data)
+            })
+            .catch(error => console.log(error))
+    }
     function getNamesAndSumsOfInvestements() {
         const data = [
             { name: 'Deposits', value: sumOfActiveDeposits },
@@ -48,6 +57,7 @@ function WelcomeComponent() {
         console.log(data);
         return data;
     }
+
 
     // function callHelloWorldRestApi() {
     //     console.log('called')
@@ -95,6 +105,7 @@ function WelcomeComponent() {
                     </div>
 
                 </div>
+               
 
                 <div className="text-info">{message}</div>
             </div>

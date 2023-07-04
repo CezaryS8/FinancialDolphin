@@ -18,7 +18,13 @@ public interface DepositRepository extends JpaRepository<Deposit, Integer>{
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE Deposit D SET D.isActive = false WHERE D.maturityDate <= :today")
+	@Query("UPDATE Deposit d SET d.isActive = false WHERE d.maturityDate <= :today")
 	void updateIsActiveByMaturityDate(LocalDate today);
+
+	@Query("SELECT d "+
+			"FROM Deposit d " +
+			"WHERE YEAR(d.openingDate) = :year OR Year(d.maturityDate) = :year " +
+			"ORDER BY d.openingDate")
+	List<Deposit> getDepositsByYear(int year);
 
 }

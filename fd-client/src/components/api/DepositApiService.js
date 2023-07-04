@@ -17,3 +17,6 @@ export const createDepositApi
 
 export const retrieveSumOfUserActiveDepositsApi
     = (username) => apiClient.get(`/users/${username}/deposits/total_active_amount`)
+
+export const retrieveMonthlyCumulativeSumOfUserActiveDepositsApi
+    = (username, year) => apiClient.get(`/users/${username}/deposits/total_active_cumulative_amount/${year}`)

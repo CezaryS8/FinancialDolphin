@@ -5,12 +5,19 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 @Service
 public class DepositService {
-	
+
+	private DepositRepository depositRepository;
+
+	public DepositService(DepositRepository depositRepository) {
+		this.depositRepository = depositRepository;
+	}
 	private static List<Deposit> deposits = new ArrayList<>();
 	
 	private static int depositsCount = 0;
@@ -42,4 +49,26 @@ public class DepositService {
 		deleteById(deposit.getId());
 		deposits.add(deposit);
 	}
+
+	public BigDecimal[] getMonthlyCumulativeValues(int year) {
+		BigDecimal[] monthAmount = new BigDecimal[12];
+
+		for (int i = 0; i < 12; i++) {
+			monthAmount[i] = new BigDecimal(0);
+		}
+
+		List<Deposit> deposits = depositRepository.getDepositsByYear(year);
+
+		for (Deposit deposit : deposits) {
+			for(int i=deposit.getOpeningDate().getMonthValue(); i <= deposit.getMaturityDate().getMonthValue(); i++) {
+				monthAmount[i-1] = monthAmount[i-1].add(deposit.getAmount());
+			}
+		}
+//		for(int i=0; i<12; i++)
+//			System.out.println("Wartość: " + monthAmount[i]);
+
+		return monthAmount;
+	}
+
+
 }

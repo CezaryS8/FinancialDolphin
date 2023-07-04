@@ -44,7 +44,7 @@ const data = [
     pv: 4300,
     amt: 2100,
   },
-];
+]; 
 
 export default class OverviewDiversityAreaChartComponent extends PureComponent {
 
