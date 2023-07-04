@@ -61,8 +61,8 @@ public class DepositController {
 	}
 
 	@GetMapping("/users/{username}/deposits/total_active_cumulative_amount/{year}")
-	public BigDecimal[] getMonthlyCumulativeValues(@PathVariable int year) {
-		return depositService.getMonthlyCumulativeValues(year);
+	public BigDecimal[] getMonthlyCumulativeValues(@PathVariable String username, @PathVariable int year) {
+		return depositService.getMonthlyCumulativeValues(username, year);
 	}
 
 }

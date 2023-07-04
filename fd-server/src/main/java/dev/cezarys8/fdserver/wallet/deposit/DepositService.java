@@ -50,14 +50,14 @@ public class DepositService {
 		deposits.add(deposit);
 	}
 
-	public BigDecimal[] getMonthlyCumulativeValues(int year) {
+	public BigDecimal[] getMonthlyCumulativeValues(String username, int year) {
 		BigDecimal[] monthAmount = new BigDecimal[12];
 
 		for (int i = 0; i < 12; i++) {
 			monthAmount[i] = new BigDecimal(0);
 		}
 
-		List<Deposit> deposits = depositRepository.getDepositsByYear(year);
+		List<Deposit> deposits = depositRepository.getUserDepositsByYear(username, year);
 
 		for (Deposit deposit : deposits) {
 			for(int i=deposit.getOpeningDate().getMonthValue(); i <= deposit.getMaturityDate().getMonthValue(); i++) {

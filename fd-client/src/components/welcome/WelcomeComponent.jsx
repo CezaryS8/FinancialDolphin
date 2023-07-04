@@ -20,6 +20,7 @@ function WelcomeComponent() {
 
     const [sumOfActiveDeposits, setSumOfActiveDeposits] = useState(0)
     const [sumOfCryptocurrencies, setSumOfCryptocurrencies] = useState(0)
+    const [monthSumsOfActiveDeposits, setMonthSumsOfActiveDeposits] = useState([])
 
     useEffect(() => {
         refreshSumOfDeposits();
@@ -44,7 +45,7 @@ function WelcomeComponent() {
     function refreshMonthlyCumulativeSumOfDeposits() {
         retrieveMonthlyCumulativeSumOfUserActiveDepositsApi(username, 2023)
             .then(response => {
-                // TODO
+                setMonthSumsOfActiveDeposits(response.data)
                 console.log(response.data)
             })
             .catch(error => console.log(error))
@@ -54,9 +55,26 @@ function WelcomeComponent() {
             { name: 'Deposits', value: sumOfActiveDeposits },
             { name: 'Cryptocurrencies', value: sumOfCryptocurrencies }
         ];
-        console.log(data);
         return data;
     }
+    function getMonthSumsOfInvestements() {
+        const data = [
+            { month: 'Jan', deposits: monthSumsOfActiveDeposits[0]},
+            { month: 'Feb', deposits: monthSumsOfActiveDeposits[1]},
+            { month: 'Mar', deposits: monthSumsOfActiveDeposits[2]},
+            { month: 'Apr', deposits: monthSumsOfActiveDeposits[3]},
+            { month: 'May', deposits: monthSumsOfActiveDeposits[4]},
+            { month: 'Jun', deposits: monthSumsOfActiveDeposits[5]},
+            { month: 'Jul', deposits: monthSumsOfActiveDeposits[6]},
+            { month: 'Aug', deposits: monthSumsOfActiveDeposits[7]},
+            { month: 'Sep', deposits: monthSumsOfActiveDeposits[8]},
+            { month: 'Oct', deposits: monthSumsOfActiveDeposits[9]},
+            { month: 'Nov', deposits: monthSumsOfActiveDeposits[10]},
+            { month: 'Dec', deposits: monthSumsOfActiveDeposits[11]},
+        ];
+        return data;
+    }
+
 
 
     // function callHelloWorldRestApi() {
@@ -101,7 +119,7 @@ function WelcomeComponent() {
                         <OverviewDiversityPieChartComponent data={getNamesAndSumsOfInvestements()}></OverviewDiversityPieChartComponent>
                     </div>
                     <div className="col-lg-6">
-                        <OverviewDiversityAreaChartComponent />
+                        <OverviewDiversityAreaChartComponent data={getMonthSumsOfInvestements()}></OverviewDiversityAreaChartComponent>
                     </div>
 
                 </div>

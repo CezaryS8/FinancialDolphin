@@ -23,8 +23,8 @@ public interface DepositRepository extends JpaRepository<Deposit, Integer>{
 
 	@Query("SELECT d "+
 			"FROM Deposit d " +
-			"WHERE YEAR(d.openingDate) = :year OR Year(d.maturityDate) = :year " +
+			"WHERE d.username = :username and (YEAR(d.openingDate) = :year OR Year(d.maturityDate) = :year) " +
 			"ORDER BY d.openingDate")
-	List<Deposit> getDepositsByYear(int year);
+	List<Deposit> getUserDepositsByYear(String username, int year);
 
 }
