@@ -40,7 +40,6 @@ export default function SignInSide() {
   const authContext = useAuth()
 
   async function handleSubmit(event) {
-    debugger
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     

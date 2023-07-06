@@ -18,7 +18,7 @@ function AuthenticatedRoute({children}) {
     if(authContext.isAuthenticated)
         return children
 
-    return <Navigate to="/" />
+    return <Navigate to="/login" />
 }
 
 export default function FdClientApp() {

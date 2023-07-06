@@ -72,6 +72,7 @@ export default class OverviewDiversityAreaChartComponent extends PureComponent {
           <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" /> */}
         </AreaChart>
       </ResponsiveContainer>
+      
     );
   }
 }

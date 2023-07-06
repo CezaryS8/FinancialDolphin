@@ -11,10 +11,8 @@ import OverviewDiversityPieChartComponent from './OverviewDiversityPieChartCompo
 
 
 function WelcomeComponent() {
-
-    const { username } = useParams()
-
     const authContext = useAuth()
+    const username = authContext.username
 
     const [message, setMessage] = useState(null)
 
@@ -101,9 +99,7 @@ function WelcomeComponent() {
         <>
             <Box height={100} />
             <div className="WelcomeComponent">
-                <h1>Welcome {username}</h1>
-
-                <div className="row m-4">
+                <h1>Welcome {username}</h1><div className="row m-4">
                     <div className="col-lg-4 col-md-6 p-2">
                         <OverviewCardComponent text="Deposits" amount={sumOfActiveDeposits}></OverviewCardComponent>
                     </div>
@@ -123,7 +119,7 @@ function WelcomeComponent() {
                     </div>
 
                 </div>
-               
+                
 
                 <div className="text-info">{message}</div>
             </div>

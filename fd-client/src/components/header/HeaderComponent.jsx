@@ -15,6 +15,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom'
 import { useAuth } from '../security/AuthContext'
 import { FaBeer } from 'react-icons/fa';
+import logoImage from '../../img/logo-dolphin.svg';
+
 
 const drawerWidth = 240;
 
@@ -81,12 +83,12 @@ export default function Header(props) {
                     >
                         <MenuIcon />
                     </IconButton>}
-                <FaBeer />
+                <Avatar src={logoImage} alt="Logo" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                 <Typography
                     variant="h6"
                     noWrap
                     component="a"
-                    href="/"
+                    href="/deposits"
                     sx={{
                         ml: 2,
                         mr: 2,
@@ -137,7 +139,10 @@ export default function Header(props) {
                         ))}
                     </Menu>
                 </Box>
-                <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
+                {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                 */}
+                <Avatar src={logoImage} alt="Logo" sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                 <Typography
                     variant="h5"
                     noWrap
@@ -154,7 +159,7 @@ export default function Header(props) {
                         textDecoration: 'none',
                     }}
                 >
-                    LOGO
+                    FD
                 </Typography>
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                     {pages.map((page) => (
